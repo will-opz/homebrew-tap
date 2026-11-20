@@ -1,11 +1,11 @@
 class Netkit < Formula
   desc "Zero-dependency IP, DNS, and domain diagnostics CLI"
   homepage "https://github.com/will-opz/netkit"
-  # Initial pinned source snapshot, before a formal upstream release tag.
+  # Pinned source snapshot until upstream publishes formal release tags.
   # Do not use a moving branch as the stable version.
   url "https://github.com/will-opz/netkit.git",
-      revision: "9bcbe0e6d5cd7e6f7b58e6794953f91137e11d2e"
-  version "0.1.0"
+      revision: "6af23ac5a2621a217039b5f9b37be06fe735adea"
+  version "0.1.1"
 
   head "https://github.com/will-opz/netkit.git", branch: "main"
 
@@ -19,5 +19,6 @@ class Netkit < Formula
     assert_match "NetKit", shell_output("#{bin}/netkit -h")
     assert_match "192.168.31.0/24", shell_output("#{bin}/netkit ip -cidr 192.168.31.158/24")
     assert_match "Cloudflare", shell_output("#{bin}/netkit dns list")
+    assert_match "注册信息", shell_output("#{bin}/netkit domain -h")
   end
 end
