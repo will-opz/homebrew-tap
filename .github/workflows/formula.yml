@@ -1,0 +1,23 @@
+name: Tap formula checks
+
+on:
+  push:
+    paths:
+      - "Formula/**"
+      - ".github/workflows/formula.yml"
+  pull_request:
+    paths:
+      - "Formula/**"
+      - ".github/workflows/formula.yml"
+
+jobs:
+  formula-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Ruby formula syntax
+        run: |
+          set -eu
+          for formula in Formula/*.rb; do
+            ruby -c "$formula"
+          done
